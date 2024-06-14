@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails de la facture {{ facture.numeroFacture }}{% endblock %}
+
+{% block body %}
+    <h1>Détails de la facture {{ facture.numeroFacture }}</h1>
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ facture.id }}</dd>
+        <dt class="col-sm-3">Numéro de facture</dt>
+        <dd class="col-sm-9">{{ facture.numeroFacture }}</dd>
+        <dt class="col-sm-3">Date de création</dt>
+        <dd class="col-sm-9">{{ facture.dateCreation|date('d/m/Y H:i:s') }}</dd>
+        <dt class="col-sm-3">Date d'échéance</dt>
+        <dd class="col-sm-9">{{ facture.dateEcheance ? facture.dateEcheance|date('d/m/Y') : 'Non spécifiée' }}</dd>
+        <dt class="col-sm-3">Montant HT</dt>
+        <dd class="col-sm-9">{{ facture.montantHt }}</dd>
+        <dt class="col-sm-3">TVA</dt>
+        <dd class="col-sm-9">{{ facture.tva }}</dd>
+        <dt class="col-sm-3">Montant TTC</dt>
+        <dd class="col-sm-9">{{ facture.montantTtc }}</dd>
+                <dt class="col-sm-3">Méthode de Paiement</dt>
+        <dd class="col-sm-9">{{ facture.methodePaiement  }}</dd>
+        <!-- Ajoutez d'autres détails de facture si nécessaire -->
+    </dl>
+    <a href="{{ path('facture_index') }}" class="btn btn-primary">Retour à la liste des factures</a>
+    <!-- Ajoutez d'autres liens d'action si nécessaire -->
+{% endblock %}

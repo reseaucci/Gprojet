@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des responsables{% endblock %}
+
+{% block body %}
+    <h1>Liste des responsables</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for responsable in responsables %}
+                <tr>
+                    <th scope="row">{{ responsable.id }}</th>
+                    <td>{{ responsable.nom }}</td>
+                    <td>{{ responsable.prenom }}</td>
+                    <td>{{ responsable.email }}</td>
+                    <td>
+                        {% if responsable.role is not null %}
+                            {{ responsable.role.nom }}
+                        {% else %}
+                            Aucun role
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('responsable_show', {'id': responsable.id}) }}">Voir</a>
+                        <a href="{{ path('responsable_edit', {'id': responsable.id}) }}">Modifier</a>
+                        <a href="{{ path('responsable_delete', {'id': responsable.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('responsable_new') }}">Créer un nouveau responsable</a>
+{% endblock %}

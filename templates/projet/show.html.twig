@@ -1,0 +1,47 @@
+{# templates/projet/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Projet{% endblock %}
+
+{% block body %}
+    <h1>Détails du Projet</h1>
+
+    <dl class="row">
+        <dt class="col-md-3">Nom :</dt>
+        <dd class="col-md-9">{{ projet.nom }}</dd>
+
+        <dt class="col-md-3">Description :</dt>
+        <dd class="col-md-9">{{ projet.description }}</dd>
+
+        <dt class="col-md-3">Date de Début :</dt>
+        <dd class="col-md-9">{{ projet.dateDebut|date('d/m/Y') }}</dd>
+
+        <dt class="col-md-3">Date de Fin :</dt>
+        <dd class="col-md-9">{{ projet.dateFin|date('d/m/Y') }}</dd>
+
+        <dt class="col-md-3">Budget :</dt>
+        <dd class="col-md-9">{{ projet.budget }}</dd>
+
+        <dt class="col-md-3">Responsable :</dt>
+        <dd class="col-md-9">{{ projet.responsable.nom }}</dd> {# Supposant que 'nom' est une propriété de l'entité Responsable #}
+
+        <dt class="col-md-3">Statut :</dt>
+        <dd class="col-md-9">{{ projet.statut }}</dd>
+
+        <dt class="col-md-3">Budget Prévisionnel :</dt>
+        <dd class="col-md-9">{{ projet.budgetPrevisionnel }}</dd>
+
+        <dt class="col-md-3">Budget Réel :</dt>
+        <dd class="col-md-9">{{ projet.budgetReel }}</dd>
+
+        <dt class="col-md-3">Avancement :</dt>
+        <dd class="col-md-9">{{ projet.avancement }}</dd>
+
+        <dt class="col-md-3">Utilisateur :</dt>
+        <dd class="col-md-9">{{ projet.utilisateur }}</dd>
+    </dl>
+
+    <a href="{{ path('projet_edit', { 'id': projet.id }) }}" class="btn btn-primary">Modifier</a>
+    <a href="{{ path('projet_index') }}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

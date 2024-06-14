@@ -1,0 +1,45 @@
+{# templates/devis/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des Devis{% endblock %}
+
+{% block body %}
+    <h1>Liste des Devis</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>date Creation</th>
+                <th>date echeance</th>
+                <th>Montant HT</th>
+                <th>TVA</th>
+                <th>montant TTC</th>
+                <th>client ID</th>
+                <th>facture ID</th>
+                <th>Projet ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for devis in devis %}
+                <tr>
+                    <td>{{ devis.id }}</td>
+                    
+                    <td>
+                        <a href="{{ path('devis_show', {'id': devis.id}) }}">Voir</a>
+                        <a href="{{ path('devis_edit', {'id': devis.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('devis_new') }}">Nouveau devis</a>
+{% endblock %}

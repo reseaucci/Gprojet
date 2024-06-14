@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des risques{% endblock %}
+
+{% block body %}
+    <h1>Liste des risques</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Impact Potentiel</th>
+                <th>Plan d'action</th>
+                <th>Projet</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for risque in risques %}
+                <tr>
+                    <td>{{ risque.id }}</td>
+                    <td>{{ risque.nom }}</td>
+                    <td>{{ risque.description }}</td>
+                    <td>{{ risque.impactPotentiel }}</td>
+                    <td>{{ risque.planAction }}</td>
+                    <td>{{ risque.projet.nom }}</td>
+                    <td>
+                        <a href="{{ path('risque_show', {'id': risque.id}) }}">Voir</a>
+                        <a href="{{ path('risque_edit', {'id': risque.id}) }}">Modifier</a>
+                        <form method="post" action="{{ path('risque_delete', {'id': risque.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce risque ?');" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ risque.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('risque_new') }}" class="btn btn-primary">Créer un nouveau risque</a>
+{% endblock %}

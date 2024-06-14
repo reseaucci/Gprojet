@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/new.css') }}">
+{% endblock %}
+
+
+{% block title %}Créer un nouveau rôle{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau rôle</h1>
+
+   {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    <button type="submit">Enregistrer</button>
+{{ form_end(form) }}
+
+
+    <a href="{{ path('role_index') }}">Retour à la liste</a>
+{% endblock %}

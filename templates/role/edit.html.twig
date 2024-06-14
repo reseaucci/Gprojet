@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/edit.css') }}">
+{% endblock %}
+
+{% block title %}Modifier le rôle{{ role.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier le rôle {{ role.nom }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    <button type="submit">Enregistrer</button>
+{{ form_end(form) }}
+
+
+    <a href="{{ path('role_show', {'id': role.id}) }}">Annuler</a>
+{% endblock %}

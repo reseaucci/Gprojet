@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/edit.css') }}">
+{% endblock %}
+
+{% block title %}Modifier le responsable{% endblock %}
+
+{% block body %}
+    <h1>Modifier le responsable</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.role) }}
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('responsable_index') }}">Retour à la liste</a>
+{% endblock %}

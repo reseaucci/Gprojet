@@ -1,0 +1,53 @@
+{# templates/conge/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des Congés{% endblock %}
+
+{% block body %}
+    <h1>Liste des Congés</h1>
+
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Commentaire</th>
+                <th>Utilisateur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for conge in conges %}
+                <tr>
+                    <td>{{ conge.id }}</td>
+                    <td>{{ conge.type }}</td>
+                    <td>{{ conge.dateDebut ? conge.dateDebut|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+                    <td>{{ conge.dateFin ? conge.dateFin|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+                    <td>{{ conge.commentaire }}</td>
+                    <td>{{ conge.utilisateur ? conge.utilisateur.nom : 'Non défini' }}</td> <!-- Assuming `Utilisateur` entity has a `nom` property -->
+                    <td>
+                        <a href="{{ path('conge_show', { 'id': conge.id }) }}">Voir</a>
+                        <a href="{{ path('conge_edit', { 'id': conge.id }) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('conge_new') }}">Nouveau congé</a>
+{% endblock %}

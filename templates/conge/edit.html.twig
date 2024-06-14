@@ -1,0 +1,34 @@
+{# templates/conge/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/edit.css') }}">
+{% endblock %}
+
+{% block title %}Modifier le Conge{% endblock %}
+
+{% block body %}
+    <h1>Modifier le Conge</h1>
+
+    {# Afficher les messages flash, s'il y en a #}
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.date_debut) }}
+        {{ form_row(form.date_fin) }}
+        {{ form_row(form.commentaire) }}
+        {{ form_row(form.utilisateur) }}
+        <button class="btn">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('conge_index') }}">Retour à la liste</a>
+{% endblock %}

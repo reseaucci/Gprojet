@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du rôle{{ role.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Détails du rôle {{ role.nom }}</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ role.id }}</dd>
+
+        <dt class="col-sm-3">Nom</dt>
+        <dd class="col-sm-9">{{ role.nom }}</dd>
+    </dl>
+
+    <a href="{{ path('role_edit', {'id': role.id}) }}">Modifier</a>
+
+    <form action="{{ path('role_delete', {'id': role.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?')">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ role.id) }}">
+        <button type="submit">Supprimer</button>
+    </form>
+
+    <a href="{{ path('role_index') }}">Retour à la liste</a>
+{% endblock %}

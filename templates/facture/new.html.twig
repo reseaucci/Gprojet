@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/new.css') }}">
+{% endblock %}
+
+{% block title %}Nouvelle Facture{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle Facture</h1>
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.numeroFacture) }}
+        {{ form_widget(form.numeroFacture, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateCreation) }}
+        {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateEcheance) }}
+        {{ form_widget(form.dateEcheance, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.montantHt) }}
+        {{ form_widget(form.montantHt, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.tva) }}
+        {{ form_widget(form.tva, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.montantTtc) }}
+        {{ form_widget(form.montantTtc, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.methodePaiement) }}
+        {{ form_widget(form.methodePaiement, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <!-- Ajoutez d'autres champs de formulaire si nécessaire -->
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+    <a href="{{ path('facture_index') }}" class="btn btn-secondary">Annuler</a>
+    <!-- Ajoutez d'autres boutons d'action si nécessaire -->
+{% endblock %}

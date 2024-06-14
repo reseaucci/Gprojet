@@ -1,0 +1,41 @@
+{# templates/client/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Client {{ client.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Détails du Client</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ client.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ client.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Mobile</th>
+                <td>{{ client.mobile }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ client.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('client_index') }}">Retour à la liste</a>
+    <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier</a>
+{% endblock %}

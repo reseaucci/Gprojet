@@ -1,0 +1,49 @@
+{# templates/probleme/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/edit.css') }}">
+{% endblock %}
+
+{% block title %}Modifier le Problème n°{{ probleme.id }}{% endblock %}
+
+{% block body %}
+    <h1>Modifier le Problème</h1>
+
+    {{ form_start(form) }}
+        <div>
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div>
+            {{ form_label(form.priorite) }}
+            {{ form_widget(form.priorite) }}
+            {{ form_errors(form.priorite) }}
+        </div>
+
+        <div>
+            {{ form_label(form.statut) }}
+            {{ form_widget(form.statut) }}
+            {{ form_errors(form.statut) }}
+        </div>
+
+        <div>
+            {{ form_label(form.dateCreation) }}
+            {{ form_widget(form.dateCreation) }}
+            {{ form_errors(form.dateCreation) }}
+        </div>
+
+        <div>
+            {{ form_label(form.dateResolution) }}
+            {{ form_widget(form.dateResolution) }}
+            {{ form_errors(form.dateResolution) }}
+        </div>
+
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('probleme_index') }}">Retour à la liste</a>
+{% endblock %}

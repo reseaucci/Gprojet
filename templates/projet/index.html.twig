@@ -1,0 +1,55 @@
+{# templates/projet/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des Projets{% endblock %}
+
+{% block body %}
+    <h1>Liste des Projets</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date de Début</th>
+                <th scope="col">Date de Fin</th>
+                <th scope="col">Budget</th>
+                <th scope="col">responsable</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for projet in projets %}
+                <tr>
+                    <th scope="row">{{ projet.id }}</th>
+                    <td>{{ projet.nom }}</td>
+                    <td>{{ projet.description }}</td>
+                    <td>{{ projet.dateDebut ? projet.dateDebut|date('d/m/Y') : '' }}</td>
+                    <td>{{ projet.dateFin ? projet.dateFin|date('d/m/Y') : '' }}</td>
+                    <td>{{ projet.budget }}</td>
+                    <td>{{ projet.responsable.nom }}</td>
+                    <td>{{ projet.statut }}</td>
+                    <td>
+                        <a href="{{ path('projet_show', {'id': projet.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('projet_edit', {'id': projet.id}) }}" class="btn btn-secondary">Modifier</a>
+                        {# Ajoutez ici d'autres actions comme la suppression, si nécessaire #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun projet trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('projet_new') }}" class="btn btn-success">Créer un nouveau projet</a>
+{% endblock %}

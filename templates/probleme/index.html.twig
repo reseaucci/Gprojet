@@ -1,0 +1,44 @@
+{# templates/probleme/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des Problèmes{% endblock %}
+
+{% block body %}
+    <h1>Liste des Problèmes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Priorité</th>
+                <th>Statut</th>
+                <th>Date de Création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for probleme in problemes %}
+                <tr>
+                    <td>{{ probleme.id }}</td>
+                    <td>{{ probleme.description }}</td>
+                    <td>{{ probleme.priorite }}</td>
+                    <td>{{ probleme.statut }}</td>
+                    <td>{{ probleme.dateCreation ? probleme.dateCreation|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+                    <td>
+                        <a href="{{ path('probleme_show', { 'id': probleme.id }) }}">Voir</a>
+                        <a href="{{ path('probleme_edit', { 'id': probleme.id }) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('probleme_new') }}">Nouveau probleme</a>
+{% endblock %}

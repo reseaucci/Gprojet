@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails de l'utilisateur{{ utilisateur.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Détails de l'utilisateur</h1>
+    <dl>
+        <dt>Nom :</dt>
+        <dd>{{ utilisateur.nom }}</dd>
+        <dt>Email :</dt>
+        <dd>{{ utilisateur.email }}</dd>
+        <dt>Rôle :</dt>
+        <dd>{{ utilisateur.role }}</dd>
+        <dt>Disponibilité :</dt>
+        <dd>{{ utilisateur.disponibilite }}</dd>
+    </dl>
+    <a href="{{ path('utilisateur_index') }}">Retour à la liste des utilisateurs</a>
+{% endblock %}

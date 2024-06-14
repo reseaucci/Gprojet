@@ -1,0 +1,91 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index
+
+jalon_show:
+    path: '/jalon/{id}'
+    controller: 'App\Controller\JalonController::show'
+    methods: ['GET']
+    requirements:
+        id: '\d+'  # Ceci indique que id doit être un entier
+
+devis_show:
+    path: '/devis/{id}'
+    controller: 'App\Controller\DevisController::show'
+    methods: ['GET']
+    requirements:
+        id: '\d+'  # Ceci indique que id doit être un entier
+
+responsable_index:
+    path: /responsable
+    controller: 'App\Controller\ResponsableController::index'
+    methods: ['GET']
+
+responsable_new:
+    path: /responsable/new
+    controller: 'App\Controller\ResponsableController::new'
+    methods: ['GET', 'POST']
+
+responsable_show:
+    path: /responsable/{id}
+    controller: 'App\Controller\ResponsableController::show'
+    methods: ['GET']
+
+responsable_edit:
+    path: /responsable/{id}/edit
+    controller: 'App\Controller\ResponsableController::edit'
+    methods: ['GET', 'POST']
+
+responsable_delete:
+    path: /responsables/{id}
+    controller: 'App\Controller\ResponsableController::delete'
+    methods: ['POST']
+
+
+facture_index:
+    path: /factures
+    controller: App\Controller\FactureController::index
+    methods: GET
+
+facture_new:
+    path: /factures/new
+    controller: App\Controller\FactureController::new
+    methods: [GET, POST]
+
+facture_show:
+    path: /factures/{id}
+    controller: App\Controller\FactureController::show
+    methods: GET
+
+facture_edit:
+    path: /factures/{id}/edit
+    controller: App\Controller\FactureController::edit
+    methods: [GET, POST]
+
+facture_delete:
+    path: /factures/{id}
+    controller: App\Controller\FactureController::delete
+    methods: POST
+
+facture_pdf:
+    path: /factures/{id}/pdf
+    controller: App\Controller\FactureController::exportPdf
+    methods: GET
+
+projet_delete:
+    path: /projet/{id}
+    controller: App\Controller\ProjetController::delete
+    methods: POST
+
+
+

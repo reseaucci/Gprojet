@@ -1,0 +1,26 @@
+{# templates/client/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/new.css') }}">
+{% endblock %}
+
+
+{% block title %}Nouveau Client{% endblock %}
+
+{% block body %}
+<h1>Nouveau Client</h1>
+
+{% if app.flashes %}
+  <ul class="flash-messages">
+    {% for label, messages in app.flashes %}
+      {% for message in messages %}
+        <li class="flash-{{ label }}">{{ message }}</li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{{ form(form) }}  <a href="{{ path('client_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block body %}
+    <h1>Liste des tâches</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tache in taches %}
+                <tr>
+                    <td>{{ tache.id }}</td>
+                    <td>{{ tache.title }}</td>
+                    <td>
+                        <a href="{{ path('tache_show', {'id': tache.id}) }}">Voir</a>
+                        <a href="{{ path('tache_edit', {'id': tache.id}) }}">Modifier</a>
+                        <form method="post" action="{{ path('tache_delete', {'id': tache.id}) }}" style="display:inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tache.id) }}">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tache_new') }}">Créer une nouvelle tâche</a>
+{% endblock %}

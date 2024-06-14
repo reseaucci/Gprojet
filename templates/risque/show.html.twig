@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du risque{% endblock %}
+
+{% block body %}
+    <h1>Détails du risque</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ risque.id }}</dd>
+        <dt class="col-sm-3">Nom</dt>
+        <dd class="col-sm-9">{{ risque.nom }}</dd>
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">{{ risque.description }}</dd>
+        <dt class="col-sm-3">Impact Potentiel</dt>
+        <dd class="col-sm-9">{{ risque.impactPotentiel }}</dd>
+        <dt class="col-sm-3">Probabilité</dt>
+        
+        <dd class="col-sm-9">{{ risque.planAction }}</dd>
+        <dt class="col-sm-3">Projet</dt>
+        <dd class="col-sm-9">{{ risque.projet.nom }}</dd>
+    </dl>
+
+    <a href="{{ path('risque_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('risque_edit', {'id': risque.id}) }}" class="btn btn-primary">Modifier</a>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des factures{% endblock %}
+
+{% block body %}
+    <h1>Liste des factures</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Numéro de facture</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Montant TTC</th>
+                <th scope="col">Méthode de paiement</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for facture in factures %}
+                <tr>
+                    <th scope="row">{{ facture.id }}</th>
+                    <td>{{ facture.numeroFacture }}</td>
+                    <td>{{ facture.dateCreation|date('d/m/Y') }}</td>
+                    <td>{{ facture.montantTtc }}</td>
+                    <td>
+                        {% if facture.methodePaiement is not null %}
+                            {{ facture.methodePaiement }}
+                        {% else %}
+                            Non spécifié
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('facture_show', {'id': facture.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('facture_edit', {'id': facture.id}) }}" class="btn btn-secondary">Modifier</a>
+                        <!-- Ajoutez d'autres actions si nécessaire -->
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune facture trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('facture_new') }}">Nouvelle Facture</a>
+{% endblock %}

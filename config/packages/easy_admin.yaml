@@ -1,0 +1,10 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+    site_name: 'My Admin'
+    design:
+        brand_color: '#FF0000'
+    entities:
+        # configure your entities here
+        Utilisateur:
+            class: App\Entity\Utilisateur
+            label: 'Utilisateur'

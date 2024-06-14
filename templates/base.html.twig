@@ -1,0 +1,23 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
+        {% block javascripts %}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
+    </head>
+    <body>
+        {% for label, messages in app.flashes %}
+            <div class="flash-{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </body>
+</html>

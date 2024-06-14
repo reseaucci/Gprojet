@@ -1,0 +1,30 @@
+{# templates/projet/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouveau Projet{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Projet</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.nom, {'label': 'Nom'}) }}
+            {{ form_row(form.description, {'label': 'Description'}) }}
+            {{ form_row(form.date_debut, {'label': 'Date de Début'}) }}
+            {{ form_row(form.date_fin, {'label': 'Date de Fin'}) }}
+            {{ form_row(form.budget, {'label': 'Budget'}) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.responsable, {'label': 'Responsable'}) }}
+            {{ form_row(form.statut, {'label': 'Statut'}) }}
+            {{ form_row(form.budget_previsionnel, {'label': 'Budget Prévisionnel'}) }}
+            {{ form_row(form.budget_reel, {'label': 'Budget Réel'}) }}
+            {{ form_row(form.avancement, {'label': 'Avancement'}) }}
+            {{ form_row(form.utilisateur, {'label': 'Utilisateur'}) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}

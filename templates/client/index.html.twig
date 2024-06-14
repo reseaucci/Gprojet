@@ -1,0 +1,51 @@
+{# templates/client/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/index.css') }}">
+{% endblock %}
+
+{% block title %}Liste des Clients{% endblock %}
+
+{% block body %}
+    <h1>Liste des Clients</h1>
+
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.nom }}</td>
+                    <td>{{ client.adresse }}</td>
+                    <td>{{ client.mobile }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>
+                        <a href="{{ path('client_show', { 'id': client.id }) }}">Voir</a>
+                        <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('client_new') }}">Nouveau Client</a>
+{% endblock %}

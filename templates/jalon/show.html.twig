@@ -1,0 +1,27 @@
+{# templates/jalon/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du Jalon{% endblock %}
+
+{% block body %}
+    <h1>Détails du Jalon</h1>
+
+    <dl>
+        <dt>ID:</dt>
+        <dd>{{ jalon.id }}</dd>
+        <dt>Nom:</dt>
+        <dd>{{ jalon.nom }}</dd>
+        <dt>Date d'échéance:</dt>
+        <dd>{{ jalon.dateEcheance ? jalon.dateEcheance|date('Y-m-d H:i:s') : 'Non défini' }}</dd>
+        <dt>Statut:</dt>
+        <dd>{{ jalon.statut }}</dd>
+    </dl>
+
+    <a href="{{ path('jalon_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{# templates/devis/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du Devis
+{% endblock %}
+
+{% block body %}
+	<h1>Détails du Devis</h1>
+
+	<p>ID:
+		{{ devis.id }}</p>
+	<!-- Affichez d'autres détails du devis en fonction de vos besoins -->
+
+	<a href="{{ path('devis_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/accueil.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header>
+            <h1>Bienvenue sur notre application de gestion</h1>
+            <p>Gérez vos responsables et les risques de vos projets efficacement.</p>
+        </header>
+        <main>
+            <div class="card">
+                <h2>Gestion des Responsables</h2>
+                <p>Ajoutez, modifiez et supprimez des responsables.</p>
+                <a href="{{ path('responsable_index') }}" class="btn">Voir les responsables</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des Risques</h2>
+                <p>Suivez et gérez les risques liés à vos projets.</p>
+                <a href="{{ path('risque_index') }}" class="btn">Voir les risques</a>
+            </div>
+            
+            <div class="card">
+                <h2>Gestion des Projets</h2>
+                <p>Ajoutez, modifiez et supprimez des Projets.</p>
+                <a href="{{ path('projet_index') }}" class="btn">Voir les Projets</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des Factures</h2>
+                <p>Ajoutez, modifiez et supprimez des Factures.</p>
+                <a href="{{ path('facture_index') }}" class="btn">Voir les Factures</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des jalons</h2>
+                <p>Ajoutez, modifiez et supprimez des jalons.</p>
+                <a href="{{ path('jalon_index') }}" class="btn">Voir les jalons</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des conges</h2>
+                <p>Ajoutez, modifiez et supprimez des conges.</p>
+                <a href="{{ path('conge_index') }}" class="btn">Voir les conges</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des devis</h2>
+                <p>Ajoutez, modifiez et supprimez des devis.</p>
+                <a href="{{ path('devis_index') }}" class="btn">Voir les devis</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des probleme</h2>
+                <p>Ajoutez, modifiez et supprimez des probleme.</p>
+                <a href="{{ path('probleme_index') }}" class="btn">Voir les probleme</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des roles</h2>
+                <p>Ajoutez, modifiez et supprimez des roles.</p>
+                <a href="{{ path('role_index') }}" class="btn">Voir les roles</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des taches</h2>
+                <p>Ajoutez, modifiez et supprimez des taches.</p>
+                <a href="{{ path('tache_index') }}" class="btn">Voir les taches</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des clients</h2>
+                <p>Ajoutez, modifiez et supprimez des clients.</p>
+                <a href="{{ path('client_index') }}" class="btn">Voir les clients</a>
+            </div>
+            <div class="card">
+                <h2>Gestion des utilisateurs</h2>
+                <p>Ajoutez, modifiez et supprimez des utilisateurs.</p>
+                <a href="{{ path('utilisateur_index') }}" class="btn">Voir les utilisateurs</a>
+            </div>
+        </main>
+    </div>
+{% endblock %}

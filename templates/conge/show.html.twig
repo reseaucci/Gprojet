@@ -1,0 +1,54 @@
+{# templates/conge/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du Conge{% endblock %}
+
+{% block body %}
+    <h1>Détails du Conge</h1>
+
+    {# Afficher les messages flash, s'il y en a #}
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ conge.id }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ conge.type }}</td>
+        </tr>
+        <tr>
+            <th>Début</th>
+            <td>{{ conge.dateDebut ? conge.dateDebut|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+        </tr>
+        <tr>
+            <th>Fin</th>
+            <td>{{ conge.dateFin ? conge.dateFin|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+        </tr>
+        <tr>
+            <th>Commentaire</th>
+            <td>{{ conge.commentaire }}</td>
+        </tr>
+        <tr>
+            <th>Utilisateur</th>
+            <td>{{ conge.utilisateur ? conge.utilisateur.nom : 'Non défini' }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ path('conge_edit', { 'id': conge.id }) }}">Modifier</a>
+    <a href="{{ path('conge_index') }}">Retour à la liste</a>
+{% endblock %}

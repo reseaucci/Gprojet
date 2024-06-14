@@ -1,0 +1,31 @@
+{# templates/conge/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Conge{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/new.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau conge</h1>
+
+    {# Afficher les messages flash, s'il y en a #}
+    {% for label, messages in app.flashes %}
+        <div class="flash-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    {# Formulaire pour créer un nouveau congé #}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('conge_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails de la tâche{% endblock %}
+
+{% block body %}
+    <h1>Détails de la tâche</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ tache.id }}</dd>
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">{{ tache.title }}</dd>
+    </dl>
+
+    <a href="{{ path('tache_index') }}">Retour à la liste</a>
+    <a href="{{ path('tache_edit', {'id': tache.id}) }}">Modifier</a>
+    <form method="post" action="{{ path('tache_delete', {'id': tache.id}) }}" style="display:inline-block;">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tache.id) }}">
+        <button class="btn btn-danger" type="submit">Supprimer</button>
+    </form>
+{% endblock %}

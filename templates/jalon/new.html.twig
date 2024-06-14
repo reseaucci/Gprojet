@@ -1,0 +1,12 @@
+{# templates/projet/new.html.twig #}
+
+{# Inclure directement le CSS sans appeler parent() #}
+<link rel="stylesheet" href="{{ asset('build/new.css') }}">
+
+{{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.date_echeance) }}
+    {{ form_row(form.statut) }}
+    {{ form_row(form.projet) }}
+    <button type="submit">Enregistrer</button>
+{{ form_end(form) }}

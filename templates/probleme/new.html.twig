@@ -1,0 +1,21 @@
+{# templates/client/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/new.css') }}">
+{% endblock %}
+
+{% block title %}Nouveau Client{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Probleme</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">Créer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('probleme_index') }}">Retour à la liste</a>
+{% endblock %}

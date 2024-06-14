@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Détails du responsable{% endblock %}
+
+{% block body %}
+    <h1>Détails du responsable</h1>
+
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ responsable.id }}</dd>
+        <dt class="col-sm-3">Nom</dt>
+        <dd class="col-sm-9">{{ responsable.nom }}</dd>
+        <dt class="col-sm-3">Prenom</dt>
+        <dd class="col-sm-9">{{ responsable.prenom }}</dd>
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">{{ responsable.email }}</dd>
+        <dt class="col-sm-3">Role</dt>
+        <dd class="col-sm-9">{% if responsable.role is not null %}{{ responsable.role.nom }}{% endif %}</dd>
+    </dl>
+
+    <a href="{{ path('responsable_index') }}">Retour à la liste</a>
+    <a href="{{ path('responsable_edit', {'id': responsable.id}) }}">Modifier</a>
+    <a href="{{ path('responsable_delete', {'id': responsable.id}) }}">Supprimer</a>
+{% endblock %}

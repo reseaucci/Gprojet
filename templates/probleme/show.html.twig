@@ -1,0 +1,46 @@
+{# templates/probleme/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/show.css') }}">
+{% endblock %}
+
+{% block title %}Problème n°{{ probleme.id }}{% endblock %}
+
+{% block body %}
+    <h1>Détails du Problème</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ probleme.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ probleme.description }}</td>
+            </tr>
+            <tr>
+                <th>Priorité</th>
+                <td>{{ probleme.priorite }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ probleme.statut }}</td>
+            </tr>
+            <tr>
+                <th>Date de Création</th>
+                <td>{{ probleme.dateCreation ? probleme.dateCreation|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+            </tr>
+            <tr>
+                <th>Date de Résolution</th>
+                <td>{{ probleme.dateResolution ? probleme.dateResolution|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('probleme_index') }}">Retour à la liste</a>
+    <a href="{{ path('probleme_edit', { 'id': probleme.id }) }}">Modifier</a>
+{% endblock %}
