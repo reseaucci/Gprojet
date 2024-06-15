@@ -27,7 +27,7 @@ class Facture
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $numero;
+    private $numeroFacture ;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
@@ -221,24 +221,9 @@ class Facture
         $this->client = $client;
         return $this;
     }
+    public function __toString(): string
+{
+    return $this->numeroFacture ?? '';
+}
 
-    /**
-     * Get the value of numero
-     */ 
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
-     * Set the value of numero
-     *
-     * @return  self
-     */ 
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
 }

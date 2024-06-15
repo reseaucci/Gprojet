@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Afficher le fichier{% endblock %}
+
+{% block body %}
+    <h1>Afficher le fichier</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fichier.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ fichier.nom }}</td>
+            </tr>
+            <tr>
+                <th>Chemin</th>
+                <td>{{ fichier.chemin }}</td>
+            </tr>
+            <tr>
+                <th>Taille</th>
+                <td>{{ fichier.taille }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ fichier.type }}</td>
+            </tr>
+            <tr>
+                <th>Facture</th>
+                <td>{{ fichier.facture.numeroFacture }}</td>
+            </tr>
+            <tr>
+                <th>Devis</th>
+                <td>{{ fichier.devis.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fichier_index') }}" class="btn btn-secondary">Retour à la liste</a>
+
+    <a href="{{ path('fichier_edit', {'id': fichier.id}) }}" class="btn btn-primary">Modifier</a>
+
+    {{ include('fichier/_delete_form.html.twig') }}
+{% endblock %}

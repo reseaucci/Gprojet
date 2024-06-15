@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des fichiers{% endblock %}
+
+{% block body %}
+    <h1>Liste des fichiers</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Chemin</th>
+                <th>Taille</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fichier in fichiers %}
+                <tr>
+                    <td>{{ fichier.id }}</td>
+                    <td>{{ fichier.nom }}</td>
+                    <td>{{ fichier.chemin }}</td>
+                    <td>{{ fichier.taille }}</td>
+                    <td>{{ fichier.type }}</td>
+                    <td>
+                        <a href="{{ path('fichier_show', {'id': fichier.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('fichier_edit', {'id': fichier.id}) }}" class="btn btn-secondary">Modifier</a>
+                        <form method="post" action="{{ path('fichier_delete', {'id': fichier.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce fichier ?');" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun fichier trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('fichier_new') }}" class="btn btn-primary">Nouveau Fichier</a>
+{% endblock %}

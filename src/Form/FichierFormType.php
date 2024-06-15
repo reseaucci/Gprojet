@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Devis;
+use App\Entity\Facture;
 use App\Entity\Fichier;
-use App\Entity\Projet;
-use App\Entity\devis;
-use App\Entity\facture;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,23 +17,18 @@ class FichierFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('chemin')
-            ->add('taille')
-            ->add('type')
-            ->add('projet_id', EntityType::class, [
-                'class' => Projet::class,
-'choice_label' => 'id',
+            ->add('nom', TextType::class)
+            ->add('chemin', TextType::class)
+            ->add('taille', IntegerType::class)
+            ->add('type', TextType::class)
+            ->add('facture', EntityType::class, [
+                'class' => Facture::class,
+                'choice_label' => 'numeroFacture',
             ])
-            ->add('facture_id', EntityType::class, [
-                'class' => facture::class,
-'choice_label' => 'id',
-            ])
-            ->add('devis_id', EntityType::class, [
-                'class' => devis::class,
-'choice_label' => 'id',
-            ])
-        ;
+            ->add('devis', EntityType::class, [
+                'class' => Devis::class,
+                'choice_label' => 'id',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

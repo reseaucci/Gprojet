@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le fichier{% endblock %}
+
+{% block body %}
+    <h1>Modifier le fichier</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('fichier_index') }}" class="btn btn-secondary">Annuler</a>
+{% endblock %}
