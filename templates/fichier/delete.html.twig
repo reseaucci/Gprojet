@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer un fichier{% endblock %}
+
+{% block body %}
+    <h1>Supprimer le fichier "{{ fichier.nom }}"</h1>
+
+    <p>Êtes-vous sûr de vouloir supprimer le fichier "{{ fichier.nom }}" ?</p>
+
+    <form method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a href="{{ path('fichier_index') }}" class="btn btn-secondary">Annuler</a>
+    </form>
+{% endblock %}

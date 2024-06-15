@@ -20,5 +20,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+
+# config/services.yaml
+parameters:
+    uploads_directory: '%kernel.project_dir%/public/uploads'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

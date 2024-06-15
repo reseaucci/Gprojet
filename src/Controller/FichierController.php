@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/fichier')]
 class FichierController extends AbstractController
@@ -23,13 +25,38 @@ class FichierController extends AbstractController
     }
 
     #[Route('/new', name: 'fichier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $fichier = new Fichier();
         $form = $this->createForm(FichierFormType::class, $fichier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $form->get('fichier')->getData();
+            if ($uploadedFile) {
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+
+                try {
+                    $uploadedFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // handle exception if something happens during file upload
+                }
+
+                // Determine mime type without symfony/mime
+                $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($fileInfo, $this->getParameter('uploads_directory').'/'.$newFilename);
+                finfo_close($fileInfo);
+
+                $fichier->setChemin($newFilename);
+                $fichier->setTaille($uploadedFile->getSize());
+                $fichier->setType($mime);
+            }
+
             $entityManager->persist($fichier);
             $entityManager->flush();
 
@@ -51,12 +78,37 @@ class FichierController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'fichier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Fichier $fichier, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Fichier $fichier, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(FichierFormType::class, $fichier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFile = $form->get('fichier')->getData();
+            if ($uploadedFile) {
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+
+                try {
+                    $uploadedFile->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // handle exception if something happens during file upload
+                }
+
+                // Determine mime type without symfony/mime
+                $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($fileInfo, $this->getParameter('uploads_directory').'/'.$newFilename);
+                finfo_close($fileInfo);
+
+                $fichier->setChemin($newFilename);
+                $fichier->setTaille($uploadedFile->getSize());
+                $fichier->setType($mime);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('fichier_index');
@@ -76,6 +128,9 @@ class FichierController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('fichier_index');
+        return $this->render('fichier/delete.html.twig', [
+            'fichier' => $fichier, // $fichier représente l'entité Fichier que vous souhaitez supprimer
+        ]);
+        
     }
 }
